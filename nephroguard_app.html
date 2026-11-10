@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f3f5f1">
+  <title>NephroGuard · Renal review desk</title>
+  <link rel="stylesheet" href="/assets/app.css">
+  <script src="/assets/app.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to workspace</a>
+  <header class="top"><div class="frame top-inner">
+    <div class="brand"><span class="mark" aria-hidden="true">✚</span><span>NephroGuard<small>SHIFT PASS / V3</small></span></div>
+    <nav aria-label="Workspace">
+      <button data-view="review" aria-pressed="true">Review desk</button>
+      <button data-view="handoff" aria-pressed="false">Handoff</button>
+      <button data-view="formulary" aria-pressed="false">Formulary</button>
+    </nav>
+    <span class="badge local">Local workspace</span>
+  </div></header>
+  <main class="frame" id="main" tabindex="-1">
+    <p class="training"><strong>Training workspace</strong><span>Use fictional cases. Clinical outputs are unvalidated and require independent review.</span></p>
+    <p id="notice" role="status" class="notice">Loading workspace…</p>
+    <button id="retry" class="quiet" hidden>Retry loading</button>
+    <section id="review" aria-labelledby="review-title">
+      <div class="heading">
+        <div><p class="eyebrow">01 / CASE WORKSPACE</p><h1 id="review-title">Renal review desk<span>.</span></h1><p>Explore renal estimates, medication flags, and handoff drafts.</p></div>
+        <button id="new-case" class="primary" disabled>New training case <span aria-hidden="true">+</span></button>
+      </div>
+      <div class="workbench">
+        <aside class="panel queue" aria-labelledby="queue-title">
+          <div class="panel-head"><div><p class="eyebrow">WORKLIST</p><h2 id="queue-title">Cases</h2></div><span class="badge" id="case-count">0</span></div>
+          <label class="sr-only" for="case-search">Search cases</label>
+          <input id="case-search" type="search" placeholder="Search cases or wards">
+          <div id="case-list" class="case-list"></div>
+        </aside>
+        <section class="panel case-panel" aria-labelledby="case-title">
+          <div id="empty-case" class="empty">Select a case to review its inputs and engine results.</div>
+          <div id="case-detail" hidden>
+            <div class="panel-head case-head"><div><p class="eyebrow" id="case-meta"></p><h2 id="case-title" tabindex="-1"></h2><p id="case-diagnosis"></p></div><div class="actions">
+              <button id="edit-case" class="quiet">Edit inputs</button>
+              <button id="case-handoff" class="quiet">View handoff</button>
+            </div></div>
+            <p id="case-error" class="notice error" hidden></p>
+            <div id="metrics" class="metrics" aria-label="Engine estimates"></div>
+            <div id="case-results" class="results"></div>
+          </div>
+        </section>
+      </div>
+    </section>
+    <section id="handoff" aria-labelledby="handoff-title" hidden>
+      <div class="heading"><div><p class="eyebrow">02 / SHIFT PASS</p><h1 id="handoff-title">Handoff drafts<span>.</span></h1><p id="handoff-subtitle">Select a case in the review desk.</p></div><button id="back-review" class="quiet">Back to cases</button></div>
+      <div id="handoff-content" class="panel export-panel" hidden>
+        <div class="panel-head"><div><p class="eyebrow">GENERATED EXAMPLE</p><h2>I-PASS draft</h2></div><div class="actions"><button id="download-handoff" class="primary">Download draft</button><button id="download-fhir" class="quiet">Download FHIR sample</button></div></div>
+        <p class="export-note">Training artifacts only. Review the source and keep sample exports outside clinical systems.</p>
+        <div id="ipass-content" class="ipass"></div>
+        <details class="handout"><summary>Patient handout sample</summary><label for="language">Language</label><select id="language"><option value="en">English</option><option value="hi">Hindi</option><option value="kn">Kannada</option></select><pre id="handout-text"></pre></details>
+        <div class="log-actions"><button id="log-handoff" class="quiet">Log training draft</button><span id="log-status" role="status"></span></div>
+      </div>
+      <section class="panel log-panel"><div class="panel-head"><h2>Recent draft log</h2></div><div id="handoff-log" class="log-list"></div></section>
+    </section>
+    <section id="formulary" aria-labelledby="formulary-title" hidden>
+      <div class="heading"><div><p class="eyebrow">03 / REFERENCE</p><h1 id="formulary-title">Engine formulary<span>.</span></h1><p>Browse the medications and sources bundled with this engine.</p></div></div>
+      <div class="panel formulary-panel"><div class="panel-head"><label class="sr-only" for="drug-search">Search medications</label><input id="drug-search" type="search" placeholder="Search medications or categories"><span class="badge" id="drug-count"></span></div><div id="drug-list"></div></div>
+    </section>
+    <footer class="foot"><span>NEPHROGUARD / LOCAL TRAINING DESK</span><span>Engine v3.0 · SQLite workspace</span></footer>
+  </main>
+  <dialog id="editor" aria-labelledby="editor-title">
+    <div class="panel-head"><div><p class="eyebrow">TRAINING CASE INPUTS</p><h2 id="editor-title">New training case</h2></div><button id="close-editor" class="quiet" type="button" aria-label="Close case editor">Close</button></div>
+    <form id="case-form">
+      <p class="form-note">Use fictional inputs. Units are listed beside each field.</p>
+      <div class="fields" id="fields"></div>
+      <div class="med-head"><h3>Medication list</h3><button type="button" class="quiet" id="add-med">Add medication</button></div>
+      <div id="med-fields"></div>
+      <p id="form-error" class="notice error" role="alert" hidden></p>
+      <div class="form-actions"><button type="submit" class="primary" value="save">Save and review</button><button type="submit" class="quiet" value="preview">Preview only</button></div>
+    </form>
+  </dialog>
+</body>
+</html>
